@@ -15,78 +15,88 @@ import config.ConfigReader;
 import io.github.bonigarcia.wdm.WebDriverManager;
 
 public class DriverManager {
-	  private static final ThreadLocal<WebDriver> driver = new ThreadLocal<>();
+    private static final ThreadLocal<WebDriver> driver = new ThreadLocal<>();
 
-	    public static WebDriver getDriver() {
-	        if (driver.get() == null) {
-	            String browserName = ConfigReader.get("browser").toUpperCase();
-	            BrowserType browser = BrowserType.valueOf(browserName);
-	            switch (browser) {
-	                case CHROME -> {
-	                    WebDriverManager.chromedriver().setup();
-	                    ChromeOptions options = new ChromeOptions();
+    public static WebDriver getDriver() {
+        if (driver.get() == null) {
+            String browserName = ConfigReader.get("browser").toUpperCase();
+            BrowserType browser = BrowserType.valueOf(browserName);
 
-	                    boolean isHeadless = Boolean.parseBoolean(ConfigReader.get("chrome.headless"));
+            switch (browser) {
+                case CHROME -> {
+                    WebDriverManager.chromedriver().setup();
+                    ChromeOptions options = new ChromeOptions();
 
-	                    options.addArguments("--disable-notifications");
-	                    options.addArguments("--disable-extensions");
-	                    options.addArguments("--disable-gpu");
-	                    options.addArguments("--no-sandbox");
-	                   
+                    boolean isHeadless = Boolean.parseBoolean(ConfigReader.get("chrome.headless"));
 
-	                    if (isHeadless) {
-	                        options.addArguments("--headless=new");  
-	                        options.addArguments("--window-size=1920,1080");
-	                    } else {
-	                    	driver.get().manage().window().maximize();
-	                    }
+                    options.addArguments("--disable-notifications");
+                    options.addArguments("--disable-extensions");
+                    options.addArguments("--disable-gpu");
+                    options.addArguments("--no-sandbox");
 
-	                    driver.set(new ChromeDriver(options));
-	                }
-	                case FIREFOX -> {
-	                    WebDriverManager.firefoxdriver().setup();
-	                    FirefoxOptions options = new FirefoxOptions();
+                    if (isHeadless) {
+                        options.addArguments("--headless=new");
+                        options.addArguments("--window-size=1920,1080");
+                    }
 
-	                    boolean isHeadless = Boolean.parseBoolean(ConfigReader.get("firefox.headless"));
+                    WebDriver chromeDriver = new ChromeDriver(options);
+                    driver.set(chromeDriver);
 
-	                    if (isHeadless) {
-	                        options.addArguments("-headless");
-	                        options.addArguments("--width=1920");
-	                        options.addArguments("--height=1080");
-	                    }
+                    if (!isHeadless) {
+                        chromeDriver.manage().window().maximize();
+                    }
+                }
 
-	                    driver.set(new FirefoxDriver(options));
+                case FIREFOX -> {
+                    WebDriverManager.firefoxdriver().setup();
+                    FirefoxOptions options = new FirefoxOptions();
 
-	                    if (!isHeadless) {
-	                        driver.get().manage().window().maximize();
-	                    }
-	                }
-	                case EDGE -> {
-	                    WebDriverManager.edgedriver().setup();
-	                    EdgeOptions options = new EdgeOptions();
+                    boolean isHeadless = Boolean.parseBoolean(ConfigReader.get("firefox.headless"));
 
-	                    boolean isHeadless = Boolean.parseBoolean(ConfigReader.get("edge.headless"));
+                    if (isHeadless) {
+                        options.addArguments("-headless");
+                        options.addArguments("--width=1920");
+                        options.addArguments("--height=1080");
+                    }
 
-	                    if (isHeadless) {
-	                        options.addArguments("--headless=new");
-	                        options.addArguments("--window-size=1920,1080");
-	                    } else {
-	                        options.addArguments("--start-maximized");
-	                    }
+                    WebDriver firefoxDriver = new FirefoxDriver(options);
+                    driver.set(firefoxDriver);
 
-	                    driver.set(new EdgeDriver(options));
-	                }
-	                default -> throw new RuntimeException("Unsupported browser: " + browserName);
-	            }
-	            driver.get().manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
-	        }
-	        return driver.get();
-	    }
+                    if (!isHeadless) {
+                        firefoxDriver.manage().window().maximize();
+                    }
+                }
 
-	    public static void quitDriver() {
-	        if (driver.get() != null) {
-	            driver.get().quit();
-	            driver.remove();
-	        }
-	    }
-	}
+                case EDGE -> {
+                    WebDriverManager.edgedriver().setup();
+                    EdgeOptions options = new EdgeOptions();
+
+                    boolean isHeadless = Boolean.parseBoolean(ConfigReader.get("edge.headless"));
+
+                    if (isHeadless) {
+                        options.addArguments("--headless=new");
+                        options.addArguments("--window-size=1920,1080");
+                    } else {
+                        options.addArguments("--start-maximized");
+                    }
+
+                    WebDriver edgeDriver = new EdgeDriver(options);
+                    driver.set(edgeDriver);
+                }
+
+                default -> throw new RuntimeException("Unsupported browser: " + browserName);
+            }
+
+            driver.get().manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+        }
+
+        return driver.get();
+    }
+
+    public static void quitDriver() {
+        if (driver.get() != null) {
+            driver.get().quit();
+            driver.remove();
+        }
+    }
+}
