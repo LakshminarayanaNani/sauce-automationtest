@@ -1,6 +1,6 @@
 # Sauce Automation Test
 
-This is a Java-based Selenium automation framework configured with Maven. It appears to be built to run UI tests potentially on [Sauce Labs](https://saucelabs.com/), a cloud-based cross-browser testing platform.
+This is a Java-based Selenium automation framework configured with Maven. It appears to be built to run UI tests potentially on [Sauce Labs](https://saucelabs.com/)
 
 ## 📁 Project Structure
 
@@ -13,7 +13,7 @@ This is a Java-based Selenium automation framework configured with Maven. It app
 
 ### Prerequisites
 
-- Java JDK 8 or above
+- Java JDK 17 or above
 - Maven 3.6+
 - Git
 - (Optional) Eclipse or IntelliJ IDEA
@@ -46,9 +46,5 @@ Tests can be executed via the Maven Surefire plugin or directly from your IDE.
 
 ## ✨ Notes
 
-- Make sure your Sauce Labs credentials are set up correctly (if using Sauce Labs).
 - Test results and reports (if implemented) will be generated in the `target/` directory.
 
-## 📄 License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
