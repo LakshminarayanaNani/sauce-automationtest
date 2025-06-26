@@ -12,17 +12,11 @@ public class DataProviderUtils
 				{
 			{"standard_user", "secret_sauce", true},
 			{"locked_out_user", "secret_sauce", false},
-			{"standard_user", "Secret", false},
-			{"", "abcdefgh_wrong", false},
-			{"lakshminarayana", "secret_sauce", false}
+			{"problem_user", "Secret", false},
+			{"secret_sauce", "problem_user", false},
+			{"visual_user", "secret_sauce", true}
 				};
 	}
 	
-	@DataProvider(name = "localStorageUser")
-	public Object[][] localStorageUser() {
-	    return new Object[][] {
-	        {"standard_user", "secret_sauce"}
-	    };
-	}
 }
 
