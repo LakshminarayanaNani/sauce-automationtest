@@ -48,3 +48,19 @@ Tests can be executed via the Maven Surefire plugin or directly from your IDE.
 
 - Test results and reports (if implemented) will be generated in the `target/` directory.
 
+ ## 📊 Sample Test Report
+
+Below are sample screenshots from the Extent Report generated after test execution.
+
+### 📋 Dashboard Summary
+<img width="955" alt="image" src="https://github.com/user-attachments/assets/ed63f2f3-3734-4ce7-916d-e2efe8bfc3af" />
+
+
+### ✅ Test Execution Details
+<img width="953" alt="image" src="https://github.com/user-attachments/assets/ca7491af-ea03-4781-8ee8-fa900f740851" />
+
+
+📎 **Full Report:**  
+[Click to open the full HTML report](target/reports/ExtentReport_20250626_135353.html)
+
+
