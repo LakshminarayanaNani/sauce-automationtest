@@ -6,7 +6,6 @@ This is a Java-based Selenium automation framework configured with Maven. It app
 
 - `pom.xml` - Maven configuration file with dependencies and build plugins.
 - `config.properties` - Configuration file for test settings.
-- `.classpath`, `.project` - Eclipse IDE metadata files.
 - `.git/` - Git version control data.
 
 ## 🚀 Getting Started
@@ -38,26 +37,26 @@ This is a Java-based Selenium automation framework configured with Maven. It app
 
 ## ⚙️ Configuration
 
-Update `config.properties` with your environment-specific settings (e.g., browser, Sauce Labs credentials, etc.)
+Update `config.properties` with according to environment-specific settings 
 
 ## 🧪 Test Execution
 
-Tests can be executed via the Maven Surefire plugin or directly from your IDE.
+Tests can be executed via the Maven Surefire plugin or directly from IDE.
 
 ## ✨ Notes
 
-- Test results and reports (if implemented) will be generated in the `target/` directory.
+- Test results and reports will be generated in the `target/` directory.
 
  ## 📊 Sample Test Report
 
 Below are sample screenshots from the Extent Report generated after test execution.
 
 ### 📋 Dashboard Summary
-<img width="600" alt="image" src="https://github.com/user-attachments/assets/ed63f2f3-3734-4ce7-916d-e2efe8bfc3af" />
+<img width="450" alt="image" src="https://github.com/user-attachments/assets/ed63f2f3-3734-4ce7-916d-e2efe8bfc3af" />
 
 
 ### ✅ Test Execution Details
-<img width="600" alt="image" src="https://github.com/user-attachments/assets/ca7491af-ea03-4781-8ee8-fa900f740851" />
+<img width="450" alt="image" src="https://github.com/user-attachments/assets/ca7491af-ea03-4781-8ee8-fa900f740851" />
 
 
 📎 **Full Report:**  
