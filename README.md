@@ -37,7 +37,7 @@ This is a Java-based Selenium automation framework configured with Maven. It app
 
 ## ⚙️ Configuration
 
-Update `config.properties` with according to environment-specific settings 
+Update `config.properties` according to environment-specific settings 
 
 ## 🧪 Test Execution
 
