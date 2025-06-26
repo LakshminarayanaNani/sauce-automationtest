@@ -52,7 +52,7 @@ Tests can be executed via the Maven Surefire plugin or directly from IDE.
 Below are sample screenshots from the Extent Report generated after test execution.
 
 ### 📋 Dashboard Summary
-<img width="450" alt="image" src="https://github.com/user-attachments/assets/ed63f2f3-3734-4ce7-916d-e2efe8bfc3af" />
+<img width="450" alt="image" src="https://github.com/user-attachments/assets/a5b73ccc-c927-4f39-b6cc-d3714588f2dc" />
 
 
 ### ✅ Test Execution Details
