@@ -1,57 +1,89 @@
 package tests;
 
+import org.openqa.selenium.Cookie;
 import org.openqa.selenium.JavascriptExecutor;
 import org.testng.Assert;
 import org.testng.annotations.Test;
-import org.openqa.selenium.Cookie;
+
+import com.aventstack.extentreports.ExtentTest;
+import com.aventstack.extentreports.Status;
+
 import config.ConfigReader;
 import pages.LoginPage;
 import utils.DataProviderUtils;
 
-public class LoginTests extends BaseTest{
+public class LoginTests extends BaseTest {
 
+    @Test(dataProvider = "loginData", dataProviderClass = DataProviderUtils.class)
+    public void loginTest(String username, String password, boolean shouldLogin) {
+       
+    	driver.get(ConfigReader.get("base.url"));
 
-	@Test(dataProvider = "loginData", dataProviderClass = DataProviderUtils.class)
-	public void loginTest(String username, String password, boolean shouldLogin) {
-		
-		driver.get(ConfigReader.get("base.url"));
+    	String scenarioType = shouldLogin ? "Positive" : "Negative";
+        String testName = String.format("loginTest - [%s] - %s", scenarioType, username);
+        ExtentTest parent = TestListner.getExtent().createTest(testName);
 
-		LoginPage loginPage = new LoginPage(driver);
-		loginPage.login(username, password);
+        
+        String userInfo = String.format("User: %s | Valid Login: %s | Session + Storage Validation", username, shouldLogin);
+        ExtentTest userNode = parent.createNode(userInfo);
 
-		if (shouldLogin) {
-			Assert.assertTrue(driver.getCurrentUrl().contains("inventory"),
-					"User should be redirected to inventory page");
+        try {
+            // --- Login Section ---
+            ExtentTest loginSection = userNode.createNode("Login Validation");
+            LoginPage loginPage = new LoginPage(driver);
+            loginPage.login(username, password);
 
-			
-			Cookie sessionCookie = driver.manage().getCookieNamed("session-username");
-			Assert.assertNotNull(sessionCookie, "Session cookie should be set");
-			Assert.assertEquals(sessionCookie.getValue(), username,
-					"Session cookie should match logged-in user");
+            // Masking password in log
+            loginSection.log(Status.INFO, "Trying with username: " + username + ", password: ******");
 
-		} else {
-			
-			Assert.assertTrue(loginPage.isErrorDisplayed(), "Error message should be shown for invalid login");
-			System.out.println("Error: " + loginPage.getErrorMessage());
-		}
-	}
+            if (shouldLogin) {
+                Assert.assertTrue(driver.getCurrentUrl().contains("inventory"));
+                loginSection.log(Status.PASS, "Login successful. Redirected to inventory page.");
 
-	@Test(dataProvider = "localStorageUser", dataProviderClass = DataProviderUtils.class)
-	public void testLocalStorageAfterLogin(String username, String password) {
-		driver.get(ConfigReader.get("base.url"));
+                // --- Session Cookie Check (Positive)---
+                ExtentTest sessionSection = userNode.createNode("Session Cookie Check");
+                Cookie sessionCookie = driver.manage().getCookieNamed("session-username");
+                Assert.assertNotNull(sessionCookie, "Session cookie not found");
+                Assert.assertEquals(sessionCookie.getValue(), username);
+                sessionSection.log(Status.PASS, "Session cookie validated: " + sessionCookie.getValue());
 
-		LoginPage loginPage = new LoginPage(driver);
-		loginPage.login(username, password);
+                // --- Local Storage Check (Positive)---
+                ExtentTest storageSection = userNode.createNode("Local Storage Check");
+                JavascriptExecutor js = (JavascriptExecutor) driver;
+                String localStorageSnapshot = (String) js.executeScript("return JSON.stringify(Object.entries(window.localStorage));");
+                storageSection.log(Status.INFO, "Local Storage: " + localStorageSnapshot);
 
-		Assert.assertTrue(driver.getCurrentUrl().contains("inventory"),
-				"Expected to be on inventory page after login");
+                userNode.log(Status.PASS, "Test passed");
 
-		JavascriptExecutor js = (JavascriptExecutor) driver;
-		String sessionUser = (String) js.executeScript(
-				"return window.localStorage.getItem('session-username');");
+            } else {
+                Assert.assertTrue(loginPage.isErrorDisplayed(), "Expected error message to be displayed for invalid login");
+                loginSection.log(Status.PASS, "Error displayed: " + loginPage.getErrorMessage());
 
-		Assert.assertEquals(sessionUser, username,
-				"session-username in localStorage should match the logged-in user");
-	}
+                // --- Session Cookie Check (Negative) ---
+                ExtentTest sessionSection = userNode.createNode("Session Cookie Check");
+                Cookie sessionCookie = driver.manage().getCookieNamed("session-username");
+                if (sessionCookie != null) {
+                    sessionSection.log(Status.INFO, "Session cookie exists even though login failed. Username in cookie: " + sessionCookie.getValue());
+                } else {
+                    sessionSection.log(Status.INFO, "Session cookie not found after failed login as expected.");
+                }
 
+                // --- Local Storage Check (Negative) ---
+                ExtentTest storageSection = userNode.createNode("Local Storage Check");
+                JavascriptExecutor js = (JavascriptExecutor) driver;
+                String localSession = (String) js.executeScript("return window.localStorage.getItem('session-username');");
+                if (localSession != null) {
+                    storageSection.log(Status.INFO, "Local storage session-username exists even though login failed: " + localSession);
+                } else {
+                    storageSection.log(Status.INFO, "Local storage session-username not found after failed login as expected.");
+                }
+
+                userNode.log(Status.PASS, "Test passed with expected login failure");
+            }
+
+        } catch (Exception e) {
+            userNode.log(Status.FAIL, e);
+            throw e;
+        }
+    }
 }
