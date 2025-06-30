@@ -1,0 +1,70 @@
+2025-06-30 19:16:50 [main] INFO  TestListner - Test Suite started.
+2025-06-30 19:16:50 [main] INFO  BaseTest - Test setup starting...
+2025-06-30 19:16:50 [main] INFO  DriverManager - Initializing browser: CHROME
+2025-06-30 19:16:56 [main] INFO  DriverManager - CHROME browser initialized successfully
+2025-06-30 19:16:56 [main] INFO  BaseTest - Driver initialized.
+2025-06-30 19:16:56 [main] INFO  LoginTests - Starting loginTest for user: standard_user | Expected Success: true
+2025-06-30 19:16:58 [main] INFO  LoginTests - Attempting login with username: standard_user
+2025-06-30 19:16:58 [main] INFO  LoginTests - Login successful. URL contains 'inventory'
+2025-06-30 19:16:58 [main] INFO  LoginTests - Session cookie validated: standard_user
+2025-06-30 19:16:58 [main] INFO  LoginTests - Positive login test passed for user: standard_user
+2025-06-30 19:16:58 [main] INFO  BaseTest - Test teardown starting...
+2025-06-30 19:16:58 [main] INFO  DriverManager - Quitting browser session...
+2025-06-30 19:16:58 [main] INFO  DriverManager - Browser session terminated.
+2025-06-30 19:16:58 [main] INFO  BaseTest - Driver quit successfully.
+2025-06-30 19:16:58 [main] INFO  BaseTest - Test setup starting...
+2025-06-30 19:16:58 [main] INFO  DriverManager - Initializing browser: CHROME
+2025-06-30 19:17:00 [main] INFO  DriverManager - CHROME browser initialized successfully
+2025-06-30 19:17:00 [main] INFO  BaseTest - Driver initialized.
+2025-06-30 19:17:00 [main] INFO  LoginTests - Starting loginTest for user: locked_out_user | Expected Success: false
+2025-06-30 19:17:02 [main] INFO  LoginTests - Attempting login with username: locked_out_user
+2025-06-30 19:17:02 [main] WARN  LoginTests - Login failed as expected. Error: Epic sadface: Sorry, this user has been locked out.
+2025-06-30 19:17:02 [main] WARN  LoginTests - Session cookie exists despite failed login: locked_out_user
+2025-06-30 19:17:02 [main] INFO  LoginTests - No local storage session-username found after failed login.
+2025-06-30 19:17:02 [main] INFO  LoginTests - Negative login test passed for user: locked_out_user
+2025-06-30 19:17:02 [main] INFO  BaseTest - Test teardown starting...
+2025-06-30 19:17:02 [main] INFO  DriverManager - Quitting browser session...
+2025-06-30 19:17:02 [main] INFO  DriverManager - Browser session terminated.
+2025-06-30 19:17:02 [main] INFO  BaseTest - Driver quit successfully.
+2025-06-30 19:17:02 [main] INFO  BaseTest - Test setup starting...
+2025-06-30 19:17:02 [main] INFO  DriverManager - Initializing browser: CHROME
+2025-06-30 19:17:04 [main] INFO  DriverManager - CHROME browser initialized successfully
+2025-06-30 19:17:04 [main] INFO  BaseTest - Driver initialized.
+2025-06-30 19:17:04 [main] INFO  LoginTests - Starting loginTest for user: problem_user | Expected Success: false
+2025-06-30 19:17:05 [main] INFO  LoginTests - Attempting login with username: problem_user
+2025-06-30 19:17:05 [main] WARN  LoginTests - Login failed as expected. Error: Epic sadface: Username and password do not match any user in this service
+2025-06-30 19:17:05 [main] INFO  LoginTests - No session cookie found after failed login.
+2025-06-30 19:17:05 [main] INFO  LoginTests - No local storage session-username found after failed login.
+2025-06-30 19:17:05 [main] INFO  LoginTests - Negative login test passed for user: problem_user
+2025-06-30 19:17:05 [main] INFO  BaseTest - Test teardown starting...
+2025-06-30 19:17:05 [main] INFO  DriverManager - Quitting browser session...
+2025-06-30 19:17:06 [main] INFO  DriverManager - Browser session terminated.
+2025-06-30 19:17:06 [main] INFO  BaseTest - Driver quit successfully.
+2025-06-30 19:17:06 [main] INFO  BaseTest - Test setup starting...
+2025-06-30 19:17:06 [main] INFO  DriverManager - Initializing browser: CHROME
+2025-06-30 19:17:07 [main] INFO  DriverManager - CHROME browser initialized successfully
+2025-06-30 19:17:07 [main] INFO  BaseTest - Driver initialized.
+2025-06-30 19:17:07 [main] INFO  LoginTests - Starting loginTest for user: secret_sauce | Expected Success: false
+2025-06-30 19:17:08 [main] INFO  LoginTests - Attempting login with username: secret_sauce
+2025-06-30 19:17:09 [main] WARN  LoginTests - Login failed as expected. Error: Epic sadface: Username and password do not match any user in this service
+2025-06-30 19:17:09 [main] INFO  LoginTests - No session cookie found after failed login.
+2025-06-30 19:17:09 [main] INFO  LoginTests - No local storage session-username found after failed login.
+2025-06-30 19:17:09 [main] INFO  LoginTests - Negative login test passed for user: secret_sauce
+2025-06-30 19:17:09 [main] INFO  BaseTest - Test teardown starting...
+2025-06-30 19:17:09 [main] INFO  DriverManager - Quitting browser session...
+2025-06-30 19:17:09 [main] INFO  DriverManager - Browser session terminated.
+2025-06-30 19:17:09 [main] INFO  BaseTest - Driver quit successfully.
+2025-06-30 19:17:09 [main] INFO  BaseTest - Test setup starting...
+2025-06-30 19:17:09 [main] INFO  DriverManager - Initializing browser: CHROME
+2025-06-30 19:17:11 [main] INFO  DriverManager - CHROME browser initialized successfully
+2025-06-30 19:17:11 [main] INFO  BaseTest - Driver initialized.
+2025-06-30 19:17:11 [main] INFO  LoginTests - Starting loginTest for user: visual_user | Expected Success: true
+2025-06-30 19:17:12 [main] INFO  LoginTests - Attempting login with username: visual_user
+2025-06-30 19:17:12 [main] INFO  LoginTests - Login successful. URL contains 'inventory'
+2025-06-30 19:17:12 [main] INFO  LoginTests - Session cookie validated: visual_user
+2025-06-30 19:17:12 [main] INFO  LoginTests - Positive login test passed for user: visual_user
+2025-06-30 19:17:12 [main] INFO  BaseTest - Test teardown starting...
+2025-06-30 19:17:12 [main] INFO  DriverManager - Quitting browser session...
+2025-06-30 19:17:12 [main] INFO  DriverManager - Browser session terminated.
+2025-06-30 19:17:12 [main] INFO  BaseTest - Driver quit successfully.
+2025-06-30 19:17:12 [main] INFO  TestListner - Test Suite finished. Flushing ExtentReports.
