@@ -49,6 +49,7 @@ public class DriverManager {
                     driver.set(chromeDriver);
                     if (!isHeadless) {
                         chromeDriver.manage().window().maximize();
+                        driver.manage().deleteAllCookies();
                     }
                 }
 
